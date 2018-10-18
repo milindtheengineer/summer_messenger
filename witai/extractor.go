@@ -43,8 +43,8 @@ func make_get_call(message string) []byte {
 func ExtractMessage(message string) {
 	byt := make_get_call(message)
 	responseMessage := Response{}
-	fmt.Println(responseMessage)
 	if err := json.Unmarshal(byt, &responseMessage); err != nil {
 		panic(err)
 	}
+	fmt.Println(responseMessage)
 }
