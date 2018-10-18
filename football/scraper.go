@@ -22,9 +22,15 @@ func SendMatches(date string) string {
 	// Find and visit all links
 	c.OnHTML("div.match-row", func(e *colly.HTMLElement) {
 		// Extract the link from the anchor HTML element
-		buffer.WriteString(standardizeSpaces(e.Text))
-		buffer.WriteString(",")
+		favTeams := [...]string{"Juventus", "Madrid", "Liverpool", "Manchester", "Wolve", "Barcelona", "Chelsea", "Spurs", "Arsenal"} // ... makes the compiler determine the length
+		for _, team := range favTeams {
+			if strings.Contains(e.Text, team) {
+				buffer.WriteString(standardizeSpaces(e.Text))
+				buffer.WriteString("    ")
+				break
+			}
 
+		}
 	})
 
 	c.Visit(url)
