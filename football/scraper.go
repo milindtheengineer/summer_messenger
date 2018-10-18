@@ -23,7 +23,7 @@ func SendMatches(date string) string {
 	c.OnHTML("div.match-row", func(e *colly.HTMLElement) {
 		// Extract the link from the anchor HTML element
 		buffer.WriteString(standardizeSpaces(e.Text))
-		buffer.WriteString(",     ")
+		buffer.WriteString(",")
 
 	})
 
