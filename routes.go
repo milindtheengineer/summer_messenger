@@ -63,7 +63,7 @@ func ProcessMessage(event Messaging) {
 	text := event.Message.Text
 	message := witai.ExtractMessage(text)
 	strings.SplitN(message, "\n", 3)
-	temp := strings.SplitN(message, "\n", 3)
+	temp := strings.Split(message, "|")
 	for _, textMessage := range temp {
 		fmt.Println(textMessage)
 		body := fmt.Sprintf(`{
