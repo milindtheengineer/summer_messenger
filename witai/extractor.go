@@ -48,9 +48,8 @@ func ExtractMessage(message string) string {
 		panic(err)
 	}
 	fmt.Println(responseMessage)
-	if responseMessage.Entities.Question[0].Value == "football matches" && responseMessage.Entities.Question != nil {
+	if responseMessage.Entities.Question[0].Value == "football matches" && len(responseMessage.Entities.Question) > 0 {
 		return football.SendMatches(responseMessage.Entities.Datetime[0].Value.Format("2006-01-02"))
-	} else {
-		return "No action for this message yet"
 	}
+	return "No action for this message yet"
 }
