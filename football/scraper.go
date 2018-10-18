@@ -32,7 +32,7 @@ func SendMatches(date string) string {
 
 		}
 	})
-	buffer.WriteString(url)
 	c.Visit(url)
+	buffer.WriteString(url)
 	return buffer.String()
 }
