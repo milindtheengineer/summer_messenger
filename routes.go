@@ -7,7 +7,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"strings"
 	"summer/witai"
 
 	"github.com/joho/godotenv"
@@ -62,29 +61,25 @@ func ProcessMessage(event Messaging) {
 	fmt.Println(event.Sender.ID)
 	text := event.Message.Text
 	message := witai.ExtractMessage(text)
-	temp := strings.Split(message, "|")
-	for _, textMessage := range temp {
-		fmt.Println(textMessage)
-		body := fmt.Sprintf(`{
+	body := fmt.Sprintf(`{
 			"recipient": {
 			  "id": "%s"
 			},
 			"message": {
 			  "text": "%s"
 			}
-		  }`, event.Sender.ID, textMessage)
+		  }`, event.Sender.ID, message)
 
-		url := fmt.Sprintf("https://graph.facebook.com/v2.6/me/messages?access_token=%s", os.Getenv("PAGE_ACCESS_TOKEN"))
-		req, err := http.NewRequest("POST", url, bytes.NewBuffer([]byte(body)))
-		req.Header.Add("Content-Type", "application/json")
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		resp, err := client.Do(req)
-		if err != nil {
-			log.Fatal(err)
-		}
-		defer resp.Body.Close()
+	url := fmt.Sprintf("https://graph.facebook.com/v2.6/me/messages?access_token=%s", os.Getenv("PAGE_ACCESS_TOKEN"))
+	req, err := http.NewRequest("POST", url, bytes.NewBuffer([]byte(body)))
+	req.Header.Add("Content-Type", "application/json")
+	if err != nil {
+		log.Fatal(err)
 	}
+
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
 }
