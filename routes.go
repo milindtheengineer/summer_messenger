@@ -69,7 +69,7 @@ func ProcessMessage(event Messaging) {
 		"message": {
 		  "text": "%s"
 		}
-	  }`, event.Sender.ID, message)
+	  }`, event.Sender.ID, "hahaha")
 
 	url := fmt.Sprintf("https://graph.facebook.com/v2.6/me/messages?access_token=%s", os.Getenv("PAGE_ACCESS_TOKEN"))
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer([]byte(body)))
