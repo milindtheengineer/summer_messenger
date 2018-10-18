@@ -61,6 +61,7 @@ func ProcessMessage(event Messaging) {
 	fmt.Println(event.Sender.ID)
 	text := event.Message.Text
 	message := witai.ExtractMessage(text)
+	fmt.Println("The message is ", message)
 	body := fmt.Sprintf(`{
 		"recipient": {
 		  "id": "%s"

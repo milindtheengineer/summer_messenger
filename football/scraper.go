@@ -22,12 +22,10 @@ func SendMatches(date string) string {
 	// Find and visit all links
 	c.OnHTML("div.match-row", func(e *colly.HTMLElement) {
 		// Extract the link from the anchor HTML element
-		fmt.Println(standardizeSpaces(e.Text))
 		buffer.WriteString(standardizeSpaces(e.Text))
 		buffer.WriteString("\n")
 	})
 
 	c.Visit(url)
-	fmt.Println("The string is ", buffer.String())
 	return buffer.String()
 }
