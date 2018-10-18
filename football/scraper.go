@@ -25,10 +25,10 @@ func SendMatches(date string) string {
 		i++
 		// Extract the link from the anchor HTML element
 		buffer.WriteString(standardizeSpaces(e.Text))
-		if i%3 == 0 {
+		if i%7 == 0 {
 			buffer.WriteString("|")
 		} else {
-			buffer.WriteString("\u000A")
+			buffer.WriteString(", ")
 		}
 	})
 
