@@ -28,7 +28,7 @@ func SendMatches(date string) string {
 		if i%3 == 0 {
 			buffer.WriteString("|")
 		} else {
-			buffer.WriteString("\n")
+			buffer.WriteString("\u000A")
 		}
 	})
 
