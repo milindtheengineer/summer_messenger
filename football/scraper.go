@@ -15,12 +15,14 @@ func standardizeSpaces(s string) string {
 // SendMatches will send the scores based on date
 func SendMatches(date string) string {
 	url := fmt.Sprintf("https://www.goal.com/en-in/fixtures/%s/", date)
+	fmt.Println(url)
 	c := colly.NewCollector()
 	var buffer bytes.Buffer
 
 	// Find and visit all links
 	c.OnHTML("div.match-row", func(e *colly.HTMLElement) {
 		// Extract the link from the anchor HTML element
+		fmt.Println(e.Text)
 		buffer.WriteString(e.Text)
 		buffer.WriteString("\n")
 	})
