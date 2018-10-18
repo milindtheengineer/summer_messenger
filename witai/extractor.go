@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"summer/football"
 
 	"github.com/joho/godotenv"
 )
@@ -40,11 +41,16 @@ func make_get_call(message string) []byte {
 	return respBody
 }
 
-func ExtractMessage(message string) {
+func ExtractMessage(message string) string {
 	byt := make_get_call(message)
 	responseMessage := Response{}
 	if err := json.Unmarshal(byt, &responseMessage); err != nil {
 		panic(err)
 	}
 	fmt.Println(responseMessage)
+	if responseMessage.Entities.Question[0].Value == "football matches" {
+		return football.SendMatches(responseMessage.Entities.Datetime[0].Value.Format("2006-01-02"))
+	} else {
+		return "No action for this message yet"
+	}
 }
