@@ -64,6 +64,7 @@ func ProcessMessage(event Messaging) {
 	message := witai.ExtractMessage(text)
 	temp := strings.Split(message, "\n")
 	for _, textMessage := range temp {
+		fmt.Println(textMessage)
 		body := fmt.Sprintf(`{
 			"recipient": {
 			  "id": "%s"
@@ -71,7 +72,7 @@ func ProcessMessage(event Messaging) {
 			"message": {
 			  "text": "%s"
 			}
-		  }`, event.Sender.ID, textMessage)
+		  }`, event.Sender.ID, "haha")
 
 		url := fmt.Sprintf("https://graph.facebook.com/v2.6/me/messages?access_token=%s", os.Getenv("PAGE_ACCESS_TOKEN"))
 		req, err := http.NewRequest("POST", url, bytes.NewBuffer([]byte(body)))
